@@ -12,7 +12,6 @@
         if('geolocation' in navigator){
             console.log('Loc is available');
             navigator.geolocation.getCurrentPosition(position => {
-                console.log(position);
                 const lat=position.coords.latitude;
                 const lon=position.coords.longitude;
                 document.getElementById('latitude').textContent=lat;
