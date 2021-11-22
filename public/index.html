@@ -9,9 +9,10 @@
 </head>
 <body>
     <script>
+        locateme = function(){
         if('geolocation' in navigator){
             console.log('Loc is available');
-            navigator.geolocation.getCurrentPosition(position => {
+            navigator.geolocation.getCurrentPosition(async position => {
                 const lat=position.coords.latitude;
                 const lon=position.coords.longitude;
                 document.getElementById('latitude').textContent=lat;
@@ -24,18 +25,22 @@
                      },
                     body:JSON.stringify(data)                 
                 };
-                fetch('/api',options)
+                const response = await fetch('/api',options);
+                const jdata = await response.json();
+                console.log(jdata);
             });
         }
         else{
             console.log('Loc is not available');
         }
+    };
         
     </script>
     <h1>Geolocation</h1>
     <p>
         latitude: <span id="latitude"></span><br />
         longitude: <span id="longitude"></span>
+        <button id="Locate" onclick="locateme()">Locate</button>
     </p>
 </body>
 </html>
